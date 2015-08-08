@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (C) 2015 nickolas360 (https://github.com/nickolas360)
+# Copyright (C) 2015 Nathan Krantz-Fire (https://github.com/zippynk)
 #
 # This file is part of nimbot.
 #
@@ -31,6 +32,7 @@ from docopt import docopt
 from collections import defaultdict
 from datetime import datetime
 from humanize import naturaltime
+from getpass import getpass
 import os
 import re
 import sys
@@ -248,8 +250,7 @@ def main():
     bot.connect(args["<host>"], int(args["<port>"]))
 
     if args["--identify"]:
-        print("Password: ", end="", file=sys.stderr)
-        bot.password(input())
+        bot.password(getpass("Password: ", stream=sys.stderr))
         print("Received password.", file=sys.stderr)
     bot.register(args["-n"])
     bot.join(args["<channel>"])
